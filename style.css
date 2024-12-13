@@ -1,1 +1,87 @@
+// Global variables to track statistics
+let totalGamesPlayed = 0;
+let totalWins = 0;
+let playerName;
+
+// Function: Game 1
+function gameOne() {
+  playerName ||= prompt("Welcome to Game 1! What's your name?");
+  if (!playerName) return alert("Please enter a valid name!");
+
+  let playAgain;
+  do {
+    totalGamesPlayed++;
+    let result = Math.random() > 0.5 ? "Win!" : "Lose!";
+    if (result === "Win!") totalWins++;
+
+    alert(`${playerName}, you ${result} in Game 1.`);
+    playAgain = prompt(`${playerName}, would you like to keep playing this game? y/n`).toLowerCase() === 'y';
+  } while (playAgain);
+
+  handleSessionEnd();
+}
+
+// Function: Game 2
+const gameTwo = function () {
+  playerName ||= prompt("Welcome to Game 2! What's your name?");
+  if (!playerName) return alert("Please enter a valid name!");
+
+  let playAgain;
+  do {
+    totalGamesPlayed++;
+    let number = Math.floor(Math.random() * 10) + 1;
+    let isWin = number > 5;
+    if (isWin) totalWins++;
+
+    alert(`${playerName}, your number is ${number}. ${isWin ? "You Win!" : "You Lose!"}`);
+    playAgain = prompt(`${playerName}, would you like to keep playing this game? y/n`).toLowerCase() === 'y';
+  } while (playAgain);
+
+  handleSessionEnd();
+};
+
+// Function: Game 3
+const gameThree = () => {
+  playerName ||= prompt("Welcome to Game 3! What's your name?");
+  if (!playerName) return alert("Please enter a valid name!");
+
+  let playAgain;
+  do {
+    totalGamesPlayed++;
+    let diceRoll = Math.ceil(Math.random() * 6);
+    let isWin = diceRoll > 3;
+    if (isWin) totalWins++;
+
+    alert(`${playerName}, you rolled a ${diceRoll}. ${isWin ? "You Win!" : "You Lose!"}`);
+    playAgain = prompt(`${playerName}, would you like to keep playing this game? y/n`).toLowerCase() === 'y';
+  } while (playAgain);
+
+  handleSessionEnd();
+};
+
+// Handle Session End
+function handleSessionEnd() {
+  const anotherGame = prompt(`${playerName}, would you like to pick another game to play? y/n`).toLowerCase();
+  if (anotherGame === 'n') {
+    displayStatistics();
+    document.getElementById('farewell-message').style.display = 'block';
+  }
+}
+
+// Display Statistics
+function displayStatistics() {
+  const winPercentage = ((totalWins / totalGamesPlayed) * 100).toFixed(2);
+  document.getElementById('statistics').innerHTML = `
+    <tr>
+      <td>${totalGamesPlayed}</td>
+      <td>${totalWins}</td>
+      <td>${winPercentage}%</td>
+    </tr>
+  `;
+}
+
+// Reload Page
+function reloadPage() {
+  location.reload();
+}
 
