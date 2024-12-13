@@ -1,1 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Your Name">
+  <title>Arcade 2 - Game Statistics</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Welcome to the Arcade</h1>
+  <p id="welcome-message"></p>
+  <div class="game-buttons">
+    <button onclick="gameOne()">Game 1</button>
+    <button onclick="gameTwo()">Game 2</button>
+    <button onclick="gameThree()">Game 3</button>
+  </div>
+  <div class="farewell" id="farewell-message" style="display: none;">
+    <p>Thanks for playing! Here are your session statistics:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Total Games Played</th>
+          <th>Total Wins</th>
+          <th>Win Percentage</th>
+        </tr>
+      </thead>
+      <tbody id="statistics"></tbody>
+    </table>
+    <button onclick="reloadPage()">Play Again</button>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
 
