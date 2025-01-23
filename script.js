@@ -1,4 +1,7 @@
+// Global variables to track statistics
 let playerName = '';
+let totalGamesPlayed = 0;
+let totalWins = 0;
 
 function startGame(gameFunction) {
     if (!playerName) {
@@ -13,11 +16,21 @@ function startGame(gameFunction) {
     gameFunction();
 }
 
+// Function to update and display the farewell message with statistics
+function displayFarewellMessage() {
+    const winPercentage = ((totalWins / totalGamesPlayed) * 100).toFixed(2);
+    document.getElementById('totalGames').textContent = totalGamesPlayed;
+    document.getElementById('totalWins').textContent = totalWins;
+    document.getElementById('winPercentage').textContent = `${winPercentage}%`;
+    document.getElementById('farewellMessage').style.display = 'block';
+}
+
 // Guessing Game as a Function Declaration
 function guessingGame() {
     let playAgain = true;
 
     while (playAgain) {
+        totalGamesPlayed++;
         const randomNumber = Math.floor(Math.random() * 10) + 1;
         console.log(randomNumber); // For testing purposes, can be removed in the final version
         
@@ -42,6 +55,7 @@ function guessingGame() {
             } else {
                 alert(`You guessed it in ${attempts} guesses!`);
                 correctGuess = true;
+                totalWins++;
             }
         }
 
@@ -50,7 +64,7 @@ function guessingGame() {
             playAgain = false;
             let pickAnotherGameResponse = prompt(`${playerName}, Would you like to pick another game to play? y/n`).toLowerCase();
             if (pickAnotherGameResponse !== 'y') {
-                document.getElementById('farewellMessage').style.display = 'block';
+                displayFarewellMessage();
             }
         }
     }
@@ -72,6 +86,7 @@ const consultOracle = function() {
     let playAgain = true;
 
     while (playAgain) {
+        totalGamesPlayed++;
         const questionInput = prompt("The Oracle awaits your question:");
         if (questionInput.trim() === '') {
             alert('Please enter a valid question!');
@@ -81,12 +96,17 @@ const consultOracle = function() {
         const randomAnswer = answers[Math.floor(Math.random() * answers.length)];
         alert(`The Oracle says: ${randomAnswer}`);
 
+        // Assuming a win if the answer is "Yes" or "Definitely"
+        if (randomAnswer === "Yes" || randomAnswer === "Definitely") {
+            totalWins++;
+        }
+
         let playAgainResponse = prompt(`${playerName}, Would you like to keep playing this game? y/n`).toLowerCase();
         if (playAgainResponse !== 'y') {
             playAgain = false;
             let pickAnotherGameResponse = prompt(`${playerName}, Would you like to pick another game to play? y/n`).toLowerCase();
             if (pickAnotherGameResponse !== 'y') {
-                document.getElementById('farewellMessage').style.display = 'block';
+                displayFarewellMessage();
             }
         }
     }
@@ -97,6 +117,7 @@ const bnh = () => {
     let playAgain = true;
 
     while (playAgain) {
+        totalGamesPlayed++;
         let playerChoice = prompt('Choose your character: Bear, Ninja, or Hunter');
         let computerChoice = 'Bear';
 
@@ -111,6 +132,7 @@ const bnh = () => {
             case 'Ninja':
                 resultMessage = `${playerName}, you chose Ninja. The computer chose Bear.`;
                 winnerMessage = `${playerName} Wins!`;
+                totalWins++;
                 break;
             case 'Hunter':
                 resultMessage = `${playerName}, you chose Hunter. The computer chose Bear.`;
@@ -128,7 +150,7 @@ const bnh = () => {
             playAgain = false;
             let pickAnotherGameResponse = prompt(`${playerName}, Would you like to pick another game to play? y/n`).toLowerCase();
             if (pickAnotherGameResponse !== 'y') {
-                document.getElementById('farewellMessage').style.display = 'block';
+                displayFarewellMessage();
             }
         }
     }
