@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Arcade</title>
+    <meta name="author" content="Your Name">
+    <title>Game Arcade 2</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>What would you like to do?</h1>
@@ -13,6 +15,18 @@
 
     <div id="farewellMessage" style="display: none;">
         <p>Thanks for playing! Have a great day!</p>
+        <table>
+            <tr>
+                <th>Total Games Played</th>
+                <th>Total Wins</th>
+                <th>Win Percentage</th>
+            </tr>
+            <tr>
+                <td id="totalGames"></td>
+                <td id="totalWins"></td>
+                <td id="winPercentage"></td>
+            </tr>
+        </table>
         <button onclick="location.reload();">Play Again</button>
     </div>
 
